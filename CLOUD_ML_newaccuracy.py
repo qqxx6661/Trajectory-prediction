@@ -39,7 +39,7 @@ def _judge_accuracy_stack(predict_array_list, labels, label_dealy_list, input_fr
         real_stack = _generate_path(labels[i:])
         for j in range(1, len(label_dealy_list) + 1):  # 从1到6个,依次取前1,2,3,4,5,6个
             predict_stack = _generate_path(predict_array_list[i][:j])
-            print(i, 'real:', real_stack, 'prediction:', predict_stack)
+            print(i, j, 'real:', real_stack, 'prediction:', predict_stack, predict_array_list[i][:j])
             correct_list[j-1] += 1  # 预先假设正确加1
             if len(predict_stack) > len(real_stack):  # 预测多走了摄像头
                 print('错误')
@@ -287,18 +287,15 @@ def cal_accuracy(test_file_inner, input_frame_number_inner, input_label_delay_in
 
 if __name__ == '__main__':
     glo_start = time.time()
-    test_file = "gallery/14-23/14-23_person_0_ML.csv"
-    # train_file = ['gallery/14-23/14-23_person_0_ML.csv', 'gallery/14-23/14-23_person_1_ML.csv',
-    #               'gallery/14-23/14-23_person_2_ML.csv']
+    test_file = "gallery/14-58/14-58_person_2_ML.csv"
+    # 180s
+    train_file = ['gallery/14-23/14-23_person_0_ML.csv', 'gallery/14-23/14-23_person_1_ML.csv',
+                  'gallery/14-23/14-23_person_2_ML.csv']
+    # 360s
     # train_file = ['gallery/14-12/14-12_person_0_ML.csv', 'gallery/14-12/14-12_person_1_ML.csv',
     #               'gallery/14-12/14-12_person_2_ML.csv', 'gallery/14-23/14-23_person_0_ML.csv',
     #               'gallery/14-23/14-23_person_1_ML.csv', 'gallery/14-23/14-23_person_2_ML.csv']
-    # train_file = ['gallery/14-12/14-12_person_0_ML.csv', 'gallery/14-12/14-12_person_1_ML.csv',
-    #               'gallery/14-12/14-12_person_2_ML.csv', 'gallery/14-08/14-08_person_0_ML.csv',
-    #               'gallery/14-08/14-08_person_1_ML.csv', 'gallery/14-08/14-08_person_2_ML.csv',
-    #               'gallery/14-14/14-14_person_0_ML.csv', 'gallery/14-14/14-14_person_1_ML.csv',
-    #               'gallery/14-14/14-14_person_2_ML.csv', 'gallery/14-23/14-23_person_0_ML.csv',
-    #               'gallery/14-23/14-23_person_1_ML.csv', 'gallery/14-23/14-23_person_2_ML.csv']
+    # 720s
     train_file = ['gallery/14-08/14-08_person_0_ML.csv', 'gallery/14-08/14-08_person_1_ML.csv',
                   'gallery/14-08/14-08_person_2_ML.csv',
                   'gallery/14-12/14-12_person_0_ML.csv', 'gallery/14-12/14-12_person_1_ML.csv',
@@ -306,24 +303,54 @@ if __name__ == '__main__':
                   'gallery/14-14/14-14_person_0_ML.csv', 'gallery/14-14/14-14_person_1_ML.csv',
                   'gallery/14-14/14-14_person_2_ML.csv',
                   'gallery/14-23/14-23_person_0_ML.csv', 'gallery/14-23/14-23_person_1_ML.csv',
-                  'gallery/14-23/14-23_person_2_ML.csv',
-                  'gallery/14-32/14-32_person_0_ML.csv', 'gallery/14-32/14-32_person_1_ML.csv',
-                  'gallery/14-32/14-32_person_2_ML.csv',
-                  'gallery/14-36/14-36_person_0_ML.csv', 'gallery/14-36/14-36_person_1_ML.csv',
-                  'gallery/14-36/14-36_person_2_ML.csv',
-                  'gallery/14-38/14-38_person_0_ML.csv', 'gallery/14-38/14-38_person_1_ML.csv',
-                  'gallery/14-38/14-38_person_2_ML.csv',
-                  'gallery/14-45/14-45_person_0_ML.csv', 'gallery/14-45/14-45_person_1_ML.csv',
-                  'gallery/14-45/14-45_person_2_ML.csv',
-                  'gallery/14-52/14-52_person_0_ML.csv', 'gallery/14-52/14-52_person_1_ML.csv',
-                  'gallery/14-52/14-52_person_2_ML.csv',
-                  'gallery/14-55/14-55_person_0_ML.csv', 'gallery/14-55/14-55_person_1_ML.csv',
-                  'gallery/14-55/14-55_person_2_ML.csv',
-                  'gallery/14-58/14-58_person_0_ML.csv', 'gallery/14-58/14-58_person_1_ML.csv',
-                  'gallery/14-58/14-58_person_2_ML.csv',
-                  'gallery/15-00/15-00_person_0_ML.csv', 'gallery/15-00/15-00_person_1_ML.csv',
-                  'gallery/15-00/15-00_person_2_ML.csv',
-                  ]
+                  'gallery/14-23/14-23_person_2_ML.csv']
+    # 720s
+    # train_file = ['gallery/14-32/14-32_person_0_ML.csv', 'gallery/14-32/14-32_person_1_ML.csv',
+    #               'gallery/14-32/14-32_person_2_ML.csv',
+    #               'gallery/14-36/14-36_person_0_ML.csv', 'gallery/14-36/14-36_person_1_ML.csv',
+    #               'gallery/14-36/14-36_person_2_ML.csv',
+    #               'gallery/14-38/14-38_person_0_ML.csv', 'gallery/14-38/14-38_person_1_ML.csv',
+    #               'gallery/14-38/14-38_person_2_ML.csv',
+    #               'gallery/14-45/14-45_person_0_ML.csv', 'gallery/14-45/14-45_person_1_ML.csv',
+    #               'gallery/14-45/14-45_person_2_ML.csv']
+    # 3480s
+    # train_file = ['gallery/14-08/14-08_person_0_ML.csv', 'gallery/14-08/14-08_person_1_ML.csv',
+    #               'gallery/14-08/14-08_person_2_ML.csv',
+    #               'gallery/14-12/14-12_person_0_ML.csv', 'gallery/14-12/14-12_person_1_ML.csv',
+    #               'gallery/14-12/14-12_person_2_ML.csv',
+    #               'gallery/14-14/14-14_person_0_ML.csv', 'gallery/14-14/14-14_person_1_ML.csv',
+    #               'gallery/14-14/14-14_person_2_ML.csv',
+    #               'gallery/14-23/14-23_person_0_ML.csv', 'gallery/14-23/14-23_person_1_ML.csv',
+    #               'gallery/14-23/14-23_person_2_ML.csv',
+    #               'gallery/14-32/14-32_person_0_ML.csv', 'gallery/14-32/14-32_person_1_ML.csv',
+    #               'gallery/14-32/14-32_person_2_ML.csv',
+    #               'gallery/14-36/14-36_person_0_ML.csv', 'gallery/14-36/14-36_person_1_ML.csv',
+    #               'gallery/14-36/14-36_person_2_ML.csv',
+    #               'gallery/14-38/14-38_person_0_ML.csv', 'gallery/14-38/14-38_person_1_ML.csv',
+    #               'gallery/14-38/14-38_person_2_ML.csv',
+    #               'gallery/14-45/14-45_person_0_ML.csv', 'gallery/14-45/14-45_person_1_ML.csv',
+    #               'gallery/14-45/14-45_person_2_ML.csv',
+    #               'gallery/14-52/14-52_person_0_ML.csv', 'gallery/14-52/14-52_person_1_ML.csv',
+    #               'gallery/14-52/14-52_person_2_ML.csv',
+    #               'gallery/14-55/14-55_person_0_ML.csv', 'gallery/14-55/14-55_person_1_ML.csv',
+    #               'gallery/14-55/14-55_person_2_ML.csv',
+    #               'gallery/14-58/14-58_person_0_ML.csv', 'gallery/14-58/14-58_person_1_ML.csv',
+    #               'gallery/14-58/14-58_person_2_ML.csv',
+    #               'gallery/15-00/15-00_person_0_ML.csv', 'gallery/15-00/15-00_person_1_ML.csv',
+    #               'gallery/15-00/15-00_person_2_ML.csv',
+    #               'gallery/15-14/15-14_person_0_ML.csv', 'gallery/15-14/15-14_person_1_ML.csv',
+    #               'gallery/15-14/15-14_person_2_ML.csv', 'gallery/15-14/15-14_person_3_ML.csv',
+    #               'gallery/15-18/15-18_person_0_ML.csv', 'gallery/15-18/15-18_person_1_ML.csv',
+    #               'gallery/15-18/15-18_person_2_ML.csv', 'gallery/15-18/15-18_person_3_ML.csv',
+    #               'gallery/15-21/15-21_person_0_ML.csv', 'gallery/15-21/15-21_person_1_ML.csv',
+    #               'gallery/15-21/15-21_person_2_ML.csv', 'gallery/15-21/15-21_person_3_ML.csv',
+    #               'gallery/15-28/15-28_person_0_ML.csv', 'gallery/15-28/15-28_person_1_ML.csv',
+    #               'gallery/15-28/15-28_person_2_ML.csv', 'gallery/15-28/15-28_person_3_ML.csv',
+    #               'gallery/15-28/15-28_person_4_ML.csv',
+    #               'gallery/15-36/15-36_person_0_ML.csv', 'gallery/15-36/15-36_person_1_ML.csv',
+    #               'gallery/15-36/15-36_person_2_ML.csv', 'gallery/15-36/15-36_person_3_ML.csv',
+    #               'gallery/15-36/15-36_person_4_ML.csv',
+    #               ]
     input_frame_number = 3  # 输入学习帧数
     input_label_delay = [1, 3, 9, 15, 30, 45]  # 预测样本和标签差
     train_model(train_file, input_frame_number, input_label_delay)
