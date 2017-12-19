@@ -5,17 +5,17 @@ import math
 size = 6
 x = np.arange(size)
 
-Learn_180 = [70.4, 64.2, 40.2, 38.2, 31.8, 20.4]
+Learn_180 = [98.73, 96.27, 78.93, 78.4, 74.43, 73.43]
 
-Learn_360 = [70.8, 67.8, 59, 54.4, 46.8, 41.2]
+Learn_360 = [99.2, 97.5, 91.7, 91.7, 80.5, 79.7]
 
-Person_720 = [77.4, 74.4, 62.6, 57.2, 49.8, 44.6]
+Person_720 = [99.2, 97.8, 97.2, 96.5, 88.5, 87.6]
 
 total_width, n = 0.8, 3
 width = total_width / n
 x = x - (total_width - width) / 2
 
-plt.xlabel('Prediction delay (s)', fontsize=20)
+plt.xlabel('Prediction range $d_{predict}$ (s)', fontsize=20)
 plt.ylabel('Average accuracy (%)', fontsize=20)
 plt.bar(x-0.9*width, Learn_180, fc='#faa755', width=0.75*width, label='180s training model')
 plt.bar(x, Learn_360, fc='#6b473c', width=0.75*width, label='360s training model')

@@ -13,6 +13,8 @@ import time
 def _generate_path(path_list):
     path_stack = []
     for cam_id in path_list:  # 画出每次的实际路线堆栈
+        if cam_id not in ['0', '1', '2', '3', '4', '5']:  # 只判断实际6个cam内情况
+            continue
         if not path_stack:
             path_stack.append(cam_id)
         else:
@@ -41,16 +43,18 @@ def _judge_accuracy_stack(predict_array_list, labels, label_dealy_list, input_fr
             predict_stack = _generate_path(predict_array_list[i][:j])
             print(i, j, 'real:', real_stack, 'prediction:', predict_stack, predict_array_list[i][:j])
             correct_list[j-1] += 1  # 预先假设正确加1
-            if len(predict_stack) > len(real_stack):  # 预测多走了摄像头
-                print('错误')
-                correct_list[j - 1] -= 1  # 有一个错误直接减1
-                continue
+            # if len(predict_stack) > len(real_stack):  # 预测多走了摄像头
+            #     print('错误')
+            #     correct_list[j - 1] -= 1  # 有一个错误直接减1
+            #     continue
             for n in range(len(predict_stack)):
-                if predict_stack[n] != real_stack[n]:
-                    print('错误')
-                    correct_list[j - 1] -= 1  # 有一个错误直接减1
+                try:
+                    if predict_stack[n] != real_stack[n]:
+                        print('错误')
+                        correct_list[j - 1] -= 1  # 有一个错误直接减1
+                        break
+                except:
                     break
-
     print(correct_list, len(predict_array_list) - index_start)
     for i in range(len(correct_list)):
         correct_list[i] /= len(predict_array_list) - index_start
@@ -287,23 +291,23 @@ def cal_accuracy(test_file_inner, input_frame_number_inner, input_label_delay_in
 
 if __name__ == '__main__':
     glo_start = time.time()
-    test_file = "gallery/14-58/14-58_person_2_ML.csv"
+    test_file = "gallery/14-36/14-36_person_0_ML.csv"
     # 180s
-    train_file = ['gallery/14-23/14-23_person_0_ML.csv', 'gallery/14-23/14-23_person_1_ML.csv',
-                  'gallery/14-23/14-23_person_2_ML.csv']
+    # train_file = ['gallery/14-23/14-23_person_0_ML.csv', 'gallery/14-23/14-23_person_1_ML.csv',
+    #               'gallery/14-23/14-23_person_2_ML.csv']
     # 360s
-    # train_file = ['gallery/14-12/14-12_person_0_ML.csv', 'gallery/14-12/14-12_person_1_ML.csv',
-    #               'gallery/14-12/14-12_person_2_ML.csv', 'gallery/14-23/14-23_person_0_ML.csv',
-    #               'gallery/14-23/14-23_person_1_ML.csv', 'gallery/14-23/14-23_person_2_ML.csv']
+    train_file = ['gallery/14-12/14-12_person_0_ML.csv', 'gallery/14-12/14-12_person_1_ML.csv',
+                  'gallery/14-12/14-12_person_2_ML.csv', 'gallery/14-23/14-23_person_0_ML.csv',
+                  'gallery/14-23/14-23_person_1_ML.csv', 'gallery/14-23/14-23_person_2_ML.csv']
     # 720s
-    train_file = ['gallery/14-08/14-08_person_0_ML.csv', 'gallery/14-08/14-08_person_1_ML.csv',
-                  'gallery/14-08/14-08_person_2_ML.csv',
-                  'gallery/14-12/14-12_person_0_ML.csv', 'gallery/14-12/14-12_person_1_ML.csv',
-                  'gallery/14-12/14-12_person_2_ML.csv',
-                  'gallery/14-14/14-14_person_0_ML.csv', 'gallery/14-14/14-14_person_1_ML.csv',
-                  'gallery/14-14/14-14_person_2_ML.csv',
-                  'gallery/14-23/14-23_person_0_ML.csv', 'gallery/14-23/14-23_person_1_ML.csv',
-                  'gallery/14-23/14-23_person_2_ML.csv']
+    # train_file = ['gallery/14-08/14-08_person_0_ML.csv', 'gallery/14-08/14-08_person_1_ML.csv',
+    #               'gallery/14-08/14-08_person_2_ML.csv',
+    #               'gallery/14-12/14-12_person_0_ML.csv', 'gallery/14-12/14-12_person_1_ML.csv',
+    #               'gallery/14-12/14-12_person_2_ML.csv',
+    #               'gallery/14-14/14-14_person_0_ML.csv', 'gallery/14-14/14-14_person_1_ML.csv',
+    #               'gallery/14-14/14-14_person_2_ML.csv',
+    #               'gallery/14-23/14-23_person_0_ML.csv', 'gallery/14-23/14-23_person_1_ML.csv',
+    #               'gallery/14-23/14-23_person_2_ML.csv']
     # 720s
     # train_file = ['gallery/14-32/14-32_person_0_ML.csv', 'gallery/14-32/14-32_person_1_ML.csv',
     #               'gallery/14-32/14-32_person_2_ML.csv',
