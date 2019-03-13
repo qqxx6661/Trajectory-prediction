@@ -43,10 +43,10 @@ x = x - (total_width - width) / 2
 plt.xlabel('Total Camera Numbers', fontsize=19)
 plt.ylabel('Computational Cost (lg(ms))', fontsize=19)
 
-plt.bar(x - 0.45 * width, prediction_cloud, fc='#036564', width=0.75 * width, label='Detection+Prediction (Cloud)')
-plt.bar(x + 0.45 * width, prediction_EaOP, fc='#250807', width=0.75 * width, label='Prediction (EATP)')
+plt.bar(x - 0.45 * width, prediction_cloud, color="w", edgecolor="k", hatch="---", width=0.75 * width, label='Detection+Prediction (Cloud)')
+plt.bar(x + 0.45 * width, prediction_EaOP, color="w", edgecolor="k", hatch="///", width=0.75 * width, label='Prediction (EATP)')
 
 plt.xticks(x, (2, 4, 6, 8), fontsize=18)
 plt.yticks(fontsize=18)
-plt.legend(loc='upper right', fontsize=10)
+plt.legend(loc='lower right', fontsize=10)
 plt.show()

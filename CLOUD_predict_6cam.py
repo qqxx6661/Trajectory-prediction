@@ -179,7 +179,7 @@ for i, each_data in enumerate(all_data):
 #     print(line)
 
 # 写入person_x_predict
-with open('gallery/' + exp_info + '/' + exp_info + '_' + person + '_apredict.csv', 'w') as f:
+with open('gallery/' + exp_info + '/' + exp_info + '_' + person + '_predict.csv', 'w') as f:
     f_csv = csv.writer(f)
     f_csv.writerows(all_data)
 
