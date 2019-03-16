@@ -41,9 +41,9 @@ plt.xlabel('Total Camera Numbers', fontsize=19)
 plt.ylabel('Average Overall Cost (s)', fontsize=19)
 
 
-plt.bar(x-0.45*width, cloud, color="w", edgecolor="k", hatch="---", width=0.75*width, label='Cloud')
+plt.bar(x-0.45*width, cloud, color="#AFEEEE", width=0.75*width, label='Cloud')
 # plt.bar(x-0.45*width, computation_cloud, fc='#033649', width=0.75*width, bottom=transmission_cloud, label='Computation (Cloud)')
-plt.bar(x+0.45*width, EaOP, color="w", edgecolor="k", hatch="///", width=0.75*width, label='EATP')
+plt.bar(x+0.45*width, EaOP, color="#800000", width=0.75*width, label='EATP')
 # plt.bar(x+0.45*width, computation_EaOP, fc='#250807', width=0.75*width, bottom=transmission_EaOP, label='Computation (EATP)')
 
 plt.xticks(x, (2, 4, 6, 8), fontsize=18)
