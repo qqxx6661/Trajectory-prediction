@@ -48,5 +48,5 @@ plt.bar(x+0.45*width, EaOP, fc='#764D39', width=0.75*width, label='EATP')
 
 plt.xticks(x, (2, 4, 6, 8), fontsize=18)
 plt.yticks(fontsize=18)
-plt.legend(loc='upper left', fontsize=15)
+plt.legend(loc='upper left')
 plt.show()

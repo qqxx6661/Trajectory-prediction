@@ -37,5 +37,5 @@ plt.bar(x + 0.45 * width, data_to_cloud, color="#800000", width=0.75 * width, la
 # plt.bar(x+0.45*width, data_to_cam, fc='#250807', width=0.75*width, bottom=data_to_cloud, label='Feedback (EaOT)')
 plt.xticks(x, (2, 4, 6, 8), fontsize=18)
 plt.yticks(fontsize=18)
-plt.legend(loc='lower right', fontsize=15)
+plt.legend(loc='lower right')
 plt.show()
