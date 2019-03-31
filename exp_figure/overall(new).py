@@ -37,16 +37,17 @@ total_width, n = 0.8, 3
 width = total_width / n
 x = x - (total_width - width) / 2
 
-plt.xlabel('Total Camera Numbers', fontsize=19)
-plt.ylabel('Average Overall Cost (s)', fontsize=19)
+plt.xlabel('Total Camera Numbers', fontsize=16)
+plt.ylabel('Average Overall Cost (s)', fontsize=16)
 
 
-plt.bar(x-0.45*width, cloud, fc='#036564', width=0.75*width, label='Cloud')
+plt.bar(x-0.45*width, cloud, fc='#7E0100', width=0.75*width, label='Cloud')
 # plt.bar(x-0.45*width, computation_cloud, fc='#033649', width=0.75*width, bottom=transmission_cloud, label='Computation (Cloud)')
-plt.bar(x+0.45*width, EaOP, fc='#764D39', width=0.75*width, label='EATP')
+plt.bar(x+0.45*width, EaOP, fc='#00807F', width=0.75*width, label='EATP')
 # plt.bar(x+0.45*width, computation_EaOP, fc='#250807', width=0.75*width, bottom=transmission_EaOP, label='Computation (EATP)')
 
-plt.xticks(x, (2, 4, 6, 8), fontsize=18)
-plt.yticks(fontsize=18)
-plt.legend(loc='upper left')
+plt.xticks(x, (2, 4, 6, 8), fontsize=14)
+plt.yticks(fontsize=14)
+plt.legend(loc='upper left', fontsize=12)
+plt.grid(axis="y", zorder=0.5)  # 生成网格,zorder越小代表越底层，bar设置为1.8刚好不遮住误差线
 plt.show()
